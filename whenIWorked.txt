@@ -1,0 +1,12 @@
+8.10.2025 ~1h
+i created repository on github, added gitignore, created 2d project in unity and started working on movement for player - key binding. 
+
+
+17.10 ~1h 15 min
+working on map, watching tutorial
+tutorial: 
+https://www.youtube.com/watch?v=ruDXAXcgqmE 
+sprites PLACEHOLDERS: https://drive.google.com/drive/folders/17TGpHRaMs6RPMbIQRMr1D_fz8BwFNj21
+
+added a simple map for testing, added colliders layer with render hiding script. 
+Dynamic collider on player works, but kinematic has problems, don't know why.
