@@ -2,7 +2,7 @@
 i created repository on github, added gitignore, created 2d project in unity and started working on movement for player - key binding. 
 
 
-17.10 ~1h 15 min
+17.10 ~1h 15 min + 1h 35 min
 working on map, watching tutorial
 tutorial: 
 https://www.youtube.com/watch?v=ruDXAXcgqmE 
@@ -10,3 +10,55 @@ sprites PLACEHOLDERS: https://drive.google.com/drive/folders/17TGpHRaMs6RPMbIQRM
 
 added a simple map for testing, added colliders layer with render hiding script. 
 Dynamic collider on player works, but kinematic has problems, don't know why.
+
+using https://github.com/h8man/NavMeshPlus
+trying to add oponent and simple move pattern. Also ai navigation
+
+
+19.10 ~ 48 min
+
+tried to fix ai navigation. 
+i succesfully baked the area, but dont really know what helped? maybe navigation rootsources2d? but that is just a guess
+oponent with nav mesh agent started to disapear, so i added agent.updateRotation = false;
+agent.updateUpAxis = false in start function. it helped.
+
+
+23.10 ~ 1 hour 50 min
+
+i am looking for different pathfinding options for my oponnents, since build in AI Navigation is problematic to work with and even with a git plug it not as precise while baking the map as i want it to be.
+
+Djikstrva vs A*.
+i decided to try implementing a* since it is faster
+https://arongranberg.com/astar/documentation/stable/pathfinding2d.html
+
+
+i installed a package that is free, and started testing it. It implements a Star pathfinding algorithm
+
+
+attempt to write it on my own
+
+i added script for map, to see if it's walkable or not
+
+
+
+05.11 ~ i didn't measure, but at least an hour
+
+i worked with a*
+
+
+12.11 ~35 min
+
+fixing a* 
+works, not ideally, but works 
+
+
+15.11 ~30 min
+healthbar for enemies
+
+
+16.11 ~2 hours
+
+
+pause menu and healthbar as seperate script
+
+started with hud - created healthbar

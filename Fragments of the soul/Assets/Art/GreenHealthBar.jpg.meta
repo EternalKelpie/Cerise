@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: ada0c02c691bc64499368468ee2ee010
+guid: ec5ccd3b1d5d59d44a90dc95b7b78c12
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8853971330905979173
-    second: temple-sliced_16_0
+      213: -3935609133846167939
+    second: GreenHealthBar_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: temple-sliced_16_0
+      name: GreenHealthBar_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 64
-        height: 32
+        width: 441
+        height: 45
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 529b42ed300afda70800000000000000
-      internalID: 8853971330905979173
+      spriteID: d7ef0523858e169c0800000000000000
+      internalID: -3935609133846167939
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      temple-sliced_16_0: 8853971330905979173
+      GreenHealthBar_0: -3935609133846167939
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
