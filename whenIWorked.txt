@@ -59,6 +59,10 @@ healthbar for enemies
 16.11 ~2 hours
 
 
-pause menu and healthbar as seperate script
+pause menu and healthbar as separate script
 
 started with hud - created healthbar
+
+
+18.11 ~1h 25 minutes
+added attack to player

@@ -864,7 +864,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!223 &1048351002
 Canvas:
   m_ObjectHideFlags: 0
@@ -1396,8 +1396,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  player: {fileID: 1752022671}
+  playerBody: {fileID: 1752022671}
   pausedGameManager: {fileID: 1146363065}
+  player: {fileID: 1752022673}
 --- !u!212 &1752022670
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1528,9 +1529,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dbf9dff01baf524ea61a3311c4aa75e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectileSpeed: 10
+  attackValue: 10
   healthbar: {fileID: 678161507}
   currentHealth: 80
   maxhealth: 80
+  foxFire: {fileID: 5282177005681702439, guid: 17e57271a2de107488c473c1eecb292c, type: 3}
 --- !u!1 &1796989460
 GameObject:
   m_ObjectHideFlags: 0

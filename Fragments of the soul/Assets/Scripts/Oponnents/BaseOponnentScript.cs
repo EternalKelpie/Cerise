@@ -50,10 +50,11 @@ public class BaseOponnentScript : MonoBehaviour
             if (_hp<0)
             {
                 // die
+                Destroy(gameObject);
             }
             if (healthBar != null)
             {
-                //healthBar.UpdateHealthBar(hp / maxHp);
+                healthBar.UpdateHealthBar(hp / maxHp);
             }
         }
     }
@@ -68,6 +69,8 @@ public class BaseOponnentScript : MonoBehaviour
         return true;
 
     }
+
+
 
 // Start is called once before the first execution of Update after the MonoBehaviour is created
 protected void Start()
@@ -86,21 +89,7 @@ protected void Start()
         StartCoroutine(UpdatePath());
     }
 
-    IEnumerator UpdatePath()
-    {
-        while (true)
-        {
-            if(!pausedGameManager.IsPaused())
-            if (gridManager != null && player != null)
-            {
-                Vector2Int start = WorldToGrid(oponnent.transform.position);
-                Vector2Int target = WorldToGrid(player.transform.position);
-                path = pathfinder.FindPath(start, target);
-                pathIndex = 0;
-                yield return new WaitForSeconds(1f);
-            }
-        }
-    }
+
 
     // Update is called once per frame
     protected void Update()
@@ -140,6 +129,31 @@ protected void Start()
         }
     }
 
+    public void TakeDamage(float value)
+    {
+        Debug.Log(" damage taken: " +value);
+        Debug.Log(" hp before: " + hp);
+        hp = hp - value;
+        Debug.Log(" hp after: " + hp);
+
+    }
+
+    IEnumerator UpdatePath()
+    {
+        while (true)
+        {
+            if (!pausedGameManager.IsPaused())
+                if (gridManager != null && player != null)
+                {
+                    Vector2Int start = WorldToGrid(oponnent.transform.position);
+                    Vector2Int target = WorldToGrid(player.transform.position);
+                    path = pathfinder.FindPath(start, target);
+                    pathIndex = 0;
+                    yield return new WaitForSeconds(1f);
+                }
+        }
+    }
+
     protected void CheckDistance() 
     {
         if (Vector3.Distance(oponnent.transform.position, player.transform.position) <= canSeeDistance)
@@ -154,11 +168,7 @@ protected void Start()
         return new Vector2Int(cell.x, cell.y);
     }
 
-   /* protected Vector3 GridToWorld(Vector2Int gridPos)
-    {
-        Vector3 world = gridManager.walkableMap.CellToWorld(new Vector3Int(gridPos.x, gridPos.y, 0));
-        return world + new Vector3(0.5f, 0.5f, 0f); // center of tile
-    }*/
+
     protected Vector3 GridToWorld(Vector2Int gridPos)
     {
         Vector3 world = gridManager.walkableMap.CellToWorld(new Vector3Int(gridPos.x, gridPos.y, 0));
@@ -171,42 +181,6 @@ protected void Start()
         
     }
 
-    /*void CreateHealthBar()
-    {
-        healthBar = new GameObject("Healthbar");
-        healthBar.transform.SetParent(transform);
-        healthBar.transform.localPosition = healthBarOffset;
-
-        healthBarFill = new GameObject("Fill");
-        healthBarFill.transform.SetParent(healthBar.transform);
-        healthBar.transform.localScale = new Vector3(0.7f, 0.7f, 1f);
-        var fillRenderer = healthBarFill.AddComponent<SpriteRenderer>();
-        fillRenderer.sprite = healthBarSprite;
-        fillRenderer.color = Color.green;
-        fillRenderer.sortingOrder = 1;
-
-        UpdateHealthBar();
-    }
-
-    void UpdateHealthBar()
-    {
-        if (healthBar == null)
-        {
-            return;
-        }
-
-        float healthPercentage = hp / maxHp;
-        healthBarFill.transform.localScale = new Vector3(healthPercentage, 1f, 1);
-
-
-        var healthBarRenderer = healthBarFill.GetComponent<SpriteRenderer>();
-        healthBarRenderer.color = Color.Lerp(Color.red, Color.green, healthPercentage);
-
-
-        if (hp<0)
-        {
-            healthBar.SetActive(false);
-        }
-    }*/
+   
 
 }

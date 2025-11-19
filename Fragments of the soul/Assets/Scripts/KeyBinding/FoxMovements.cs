@@ -5,11 +5,18 @@ public class FoxMovements : MonoBehaviour
     
     [SerializeField] private float speed = 1f;
 
-    public Rigidbody2D player;
+    public Rigidbody2D playerBody;
     public PlaytimeKeyBind pausedGameManager;
+    public Player player;
 
     private float horizontal, vertical;
 
+    private Camera cam;
+    private Vector3 mousePosition;
+    void Start()
+    {
+        cam = Camera.main;
+    }
 
     // Update is called once per frame
     void Update()
@@ -39,7 +46,37 @@ public class FoxMovements : MonoBehaviour
             Vector3 tempVect = new Vector3(horizontal, vertical, 0);
             tempVect = tempVect.normalized * speed * Time.deltaTime;
 
-            player.MovePosition(player.transform.position + tempVect);
+            playerBody.MovePosition(playerBody.transform.position + tempVect);
+
+            if (Input.GetMouseButtonUp(0)) // 0 for left click, 1 for right, 2 for middle
+            {
+                player.attack(mousePosition);
+                //OnGUI();
+            }
+
         }
+    }
+
+
+    void OnGUI()
+    {
+        Vector3 point = new Vector3();
+        Event currentEvent = Event.current;
+        Vector2 mousePos = new Vector2();
+
+        // Get the mouse position from Event.
+        // Note that the y position from Event is inverted.
+        mousePos.x = currentEvent.mousePosition.x;
+        mousePos.y = cam.pixelHeight - currentEvent.mousePosition.y;
+
+        point = cam.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, cam.nearClipPlane));
+
+        mousePosition = point;
+       /* GUILayout.BeginArea(new Rect(20, 20, 250, 120));
+        GUILayout.Label("Screen pixels: " + cam.pixelWidth + ":" + cam.pixelHeight);
+        GUILayout.Label("Mouse position: " + mousePos);
+        GUILayout.Label("World position: " + point.ToString("F3"));
+        GUILayout.EndArea();
+       */
     }
 }
