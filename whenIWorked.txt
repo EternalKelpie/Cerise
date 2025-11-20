@@ -66,3 +66,27 @@ started with hud - created healthbar
 
 18.11 ~1h 25 minutes
 added attack to player
+
+
+19.11 ~45 minutes
+
+added start menu scene with test scene loader
+started on moving camera when player moves, seems to move, added it next to player movement
+
+
+
+20.11  ~1 hour 30 minutes
+
+need to add cooldown for attack
+
+character developement system
+	main: - can invest in only 2
+		- hp boost
+		- attack boost - shooting 2 attacks at once
+		- defense boost
+	corruption path: 
+		- new attack - foxflame is now circle
+		- further attack boost
+	redemption path:
+		- add shield
+		- deff buff and hp boost	

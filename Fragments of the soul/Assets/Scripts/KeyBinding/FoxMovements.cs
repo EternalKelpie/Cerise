@@ -4,6 +4,7 @@ public class FoxMovements : MonoBehaviour
 {
     
     [SerializeField] private float speed = 1f;
+    [SerializeField] private float cameraScrollIn = 4f;
 
     public Rigidbody2D playerBody;
     public PlaytimeKeyBind pausedGameManager;
@@ -16,6 +17,7 @@ public class FoxMovements : MonoBehaviour
     void Start()
     {
         cam = Camera.main;
+        cam.orthographicSize = cameraScrollIn;
     }
 
     // Update is called once per frame
@@ -45,8 +47,11 @@ public class FoxMovements : MonoBehaviour
             //TODO: add attack, spells
             Vector3 tempVect = new Vector3(horizontal, vertical, 0);
             tempVect = tempVect.normalized * speed * Time.deltaTime;
+   
 
             playerBody.MovePosition(playerBody.transform.position + tempVect);
+            cam.transform.position = Vector3.Lerp( cam.transform.position, playerBody.transform.position + new Vector3(0, 0, -10), 0.1f);
+
 
             if (Input.GetMouseButtonUp(0)) // 0 for left click, 1 for right, 2 for middle
             {
@@ -64,19 +69,11 @@ public class FoxMovements : MonoBehaviour
         Event currentEvent = Event.current;
         Vector2 mousePos = new Vector2();
 
-        // Get the mouse position from Event.
-        // Note that the y position from Event is inverted.
         mousePos.x = currentEvent.mousePosition.x;
         mousePos.y = cam.pixelHeight - currentEvent.mousePosition.y;
 
         point = cam.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, cam.nearClipPlane));
 
         mousePosition = point;
-       /* GUILayout.BeginArea(new Rect(20, 20, 250, 120));
-        GUILayout.Label("Screen pixels: " + cam.pixelWidth + ":" + cam.pixelHeight);
-        GUILayout.Label("Mouse position: " + mousePos);
-        GUILayout.Label("World position: " + point.ToString("F3"));
-        GUILayout.EndArea();
-       */
     }
 }
