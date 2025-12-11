@@ -115,3 +115,11 @@ gollem was buggy, dont know why, but works now
 i also changed one thing in pathfinding movement
 
 shrine seems to be working? can heal and cleanse
+
+11.12	3h
+
+working on shadow creature and shadowFire
+
+added evil shrine that spawns Shadows if corruption great enough
+
+added soul -> sceneLoader

@@ -130,5 +130,9 @@ public class Player : MonoBehaviour
 
 
     }
+    public float getCorruprionLevel()
+    {
+        return corruptionLevel;
+    }
 
 }
