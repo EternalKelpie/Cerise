@@ -3,33 +3,43 @@ using UnityEngine;
 
 public class FoxFireBehaviour : MonoBehaviour
 {
+    float lifetimeCounter = 0f;
+    float lifetime = 4f;
 
-     Player player;
+    Player player;
     public void Init(Player shooter)
     {
         player = shooter;
     }
 
+    public void Update()
+    {
+        lifetimeCounter += Time.deltaTime;
+
+        if (lifetimeCounter >= lifetime)  // how long it should be alive
+            Destroy(gameObject);
+    }
 
     void OnCollisionEnter2D(Collision2D collision)
-    {
-        BaseOponnentScript opponent = collision.gameObject.GetComponent<BaseOponnentScript>();
+    { 
+            BaseOponnentScript opponent = collision.gameObject.GetComponent<BaseOponnentScript>();
 
-        if (opponent != null)
-        {
-            opponent.TakeDamage(player.getAttackValue());
-            Destroy(gameObject);
-            return;
-        }
+            if (opponent != null)
+            {
+                opponent.TakeDamage(player.getAttackValue());
+                Destroy(gameObject);
+               
+                return;
+            }
 
-        Player playerCollision = collision.gameObject.GetComponent<Player>();
-        if (playerCollision == null)
-        {
-            Destroy(gameObject);
+            Player playerCollision = collision.gameObject.GetComponent<Player>();
+            if (playerCollision == null)
+            {
+                Destroy(gameObject);
 
 
-        }
-
+            }
+        
 
     }
 

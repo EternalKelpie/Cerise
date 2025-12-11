@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
     public float currentHealth, maxhealth;
    
     public PlayerHp healthbar;
+    public PlayerHp corruptionBar;
     public GameObject foxFire;
     private GameObject clone;
 
@@ -15,9 +16,12 @@ public class Player : MonoBehaviour
 
     float skillUpgradePoint;
 
+    float corruptionLevel = 0;
+
     void Start()
     {
         healthbar.SetMaxHealth(maxhealth);
+        corruptionBar.SetMaxHealth(100);
         skillUpgradePoint = 2;                      // todo: change it, it should be added gradually
     }
 
@@ -37,14 +41,15 @@ public class Player : MonoBehaviour
     }
 
     public void GetDamage(float healthChange)
-    { 
+    {
+
         currentHealth -= healthChange - (0.01f * defense * healthChange);
         currentHealth = Mathf.Clamp(currentHealth, 0, maxhealth);
 
         healthbar.SetHealth(currentHealth);
-    
-    
-    
+
+
+
     }
 
     public void attack(Vector3 mousePosition)
@@ -89,6 +94,22 @@ public class Player : MonoBehaviour
     {
         maxhealth *= newValue;
     }
+    public void Heal()
+    {
+        currentHealth = maxhealth;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxhealth);
+
+        healthbar.SetHealth(currentHealth);
+
+    }
+
+    public void Cleanse()
+    {
+        corruptionLevel = 0;
+        corruptionLevel = Mathf.Clamp(corruptionLevel, 0, 100);
+        corruptionBar.SetHealth(100 - corruptionLevel);
+
+    }
 
     public float GetSkillUpgradePoint()
     {
@@ -97,6 +118,17 @@ public class Player : MonoBehaviour
     public void SpendSkillUpgradePoint()
     {
         --skillUpgradePoint;
+    }
+
+    public void addCorruptionPoints(float value)
+    {
+        Debug.Log(" corruprion added " + value);
+        corruptionLevel += value;
+        corruptionLevel = Mathf.Clamp(corruptionLevel, 0, 100);
+        corruptionBar.SetHealth( 100 - corruptionLevel);
+        Debug.Log(" corruprion in total " + corruptionLevel);
+
+
     }
 
 }

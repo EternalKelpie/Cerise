@@ -8,13 +8,14 @@ public class BaseOponnentScript : MonoBehaviour
 {
     [SerializeField] protected float speed = 1f;
     [SerializeField] protected float canSeeDistance = 10f;  //Todo: dodaæ widocznoœæ, sprawdzanie, ¿eby przez œciany nie by³o widaæ
-    [SerializeField] float maxHp =50;
+    [SerializeField] protected float maxHp =50;
 
     public PlaytimeKeyBind pausedGameManager;
     //Todo: hp, attack, defense
 
     public Rigidbody2D oponnent;
-    public GameObject player;
+    public GameObject playerPathfindingPurpouse;
+    public Player player;
     public Map gridManager;
     public HealthBarBehaviour healthBar;
 
@@ -31,6 +32,7 @@ public class BaseOponnentScript : MonoBehaviour
     protected int pathIndex;
 
     protected float _hp;
+    protected float def, corruptionPoints, attackValue;
 
 
 
@@ -50,7 +52,9 @@ public class BaseOponnentScript : MonoBehaviour
             if (_hp<0)
             {
                 // die
+                player.addCorruptionPoints(corruptionPoints);
                 Destroy(gameObject);
+               
             }
             if (healthBar != null)
             {
@@ -65,6 +69,9 @@ public class BaseOponnentScript : MonoBehaviour
         healthBar.CreateHealthBar(maxHp / maxHp);
         _hp = maxHp;
         healthBar.UpdateHealthBar(maxHp / maxHp);
+        def = 0;
+        attackValue = 5;
+        corruptionPoints = 5;
 
         return true;
 
@@ -73,21 +80,21 @@ public class BaseOponnentScript : MonoBehaviour
 
 
 // Start is called once before the first execution of Update after the MonoBehaviour is created
-protected void Start()
-    {
-        Init();
-        attacking = false;
-        pathfinder = GetComponent<Pathfinding>();
-        if (pathfinder == null)
+    protected void Start()
         {
-            pathfinder = gameObject.AddComponent<Pathfinding>();
+            Init();
+            attacking = false;
+            pathfinder = GetComponent<Pathfinding>();
+            if (pathfinder == null)
+            {
+                pathfinder = gameObject.AddComponent<Pathfinding>();
+            }
+            if (gridManager != null)
+            {
+                pathfinder.Initialize(gridManager);
+            }
+            StartCoroutine(UpdatePath());
         }
-        if (gridManager != null)
-        {
-            pathfinder.Initialize(gridManager);
-        }
-        StartCoroutine(UpdatePath());
-    }
 
 
 
@@ -109,7 +116,7 @@ protected void Start()
                     if (path == null)
                     {
                         Vector2Int start = WorldToGrid(oponnent.transform.position);
-                        Vector2Int target = WorldToGrid(player.transform.position);
+                        Vector2Int target = WorldToGrid(playerPathfindingPurpouse.transform.position);
                         path = pathfinder.FindPath(start, target);
                         pathIndex = 0;
                     }
@@ -131,22 +138,25 @@ protected void Start()
 
     public void TakeDamage(float value)
     {
+
         Debug.Log(" damage taken: " +value);
         Debug.Log(" hp before: " + hp);
-        hp = hp - value;
+        hp -= value - (0.01f * def * value );
         Debug.Log(" hp after: " + hp);
 
     }
 
-    IEnumerator UpdatePath()
+
+
+    protected IEnumerator UpdatePath()
     {
         while (true)
         {
             if (!pausedGameManager.IsPaused())
-                if (gridManager != null && player != null)
+                if (gridManager != null && playerPathfindingPurpouse != null)
                 {
                     Vector2Int start = WorldToGrid(oponnent.transform.position);
-                    Vector2Int target = WorldToGrid(player.transform.position);
+                    Vector2Int target = WorldToGrid(playerPathfindingPurpouse.transform.position);
                     path = pathfinder.FindPath(start, target);
                     pathIndex = 0;
                     yield return new WaitForSeconds(1f);
@@ -156,7 +166,7 @@ protected void Start()
 
     protected void CheckDistance() 
     {
-        if (Vector3.Distance(oponnent.transform.position, player.transform.position) <= canSeeDistance)
+        if (Vector3.Distance(oponnent.transform.position, playerPathfindingPurpouse.transform.position) <= canSeeDistance)
         {
             attacking = true;
         }
@@ -172,15 +182,18 @@ protected void Start()
     protected Vector3 GridToWorld(Vector2Int gridPos)
     {
         Vector3 world = gridManager.walkableMap.CellToWorld(new Vector3Int(gridPos.x, gridPos.y, 0));
-        return world + new Vector3(0.5f, 0.25f, 0f);
+        return world+ new Vector3(0.1f, 0.1f, 0f);
 
     }
 
     protected void attack()
-    { 
-        
+    {
+        return;
     }
 
-   
+    public float getAttackValue()
+    {
+        return attackValue;
+    }
 
 }

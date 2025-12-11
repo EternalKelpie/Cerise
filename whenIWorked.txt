@@ -86,7 +86,32 @@ character developement system
 		- defense boost
 	corruption path: 
 		- new attack - foxflame is now circle
-		- further attack boost
+		- further attack boost and heal after kill
 	redemption path:
 		- add shield
-		- deff buff and hp boost	
+		- deff buff and hp boost
+
+
+25.11 1h 15 min
+
+tried adding wolf 
+
+27.11	1h 10 minutes
+
+wolf colliders problems seem to be fixed
+added corruption meter to HUD
+
+
+9.12	2h
+
+shrine should give two options - regen health and regen corruption
+
+placeholder art x3
+
+i need to add lifespan to foxflames - added
+
+gollem was buggy, dont know why, but works now
+
+i also changed one thing in pathfinding movement
+
+shrine seems to be working? can heal and cleanse
