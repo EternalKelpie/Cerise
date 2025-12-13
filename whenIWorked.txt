@@ -116,10 +116,13 @@ i also changed one thing in pathfinding movement
 
 shrine seems to be working? can heal and cleanse
 
-11.12	3h
+11.12	4h		
 
 working on shadow creature and shadowFire
 
 added evil shrine that spawns Shadows if corruption great enough
 
 added soul -> sceneLoader
+
+
+stared on first lvl, but foxFire doesnt show, dont know why
