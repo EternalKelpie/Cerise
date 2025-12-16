@@ -43,7 +43,7 @@ public class PlaytimeKeyBind : MonoBehaviour
         }
 
     }
-     void TogglePause()
+     public void TogglePause()
     { 
         gameIsPaused = !gameIsPaused;
         pauseMenu.enabled = gameIsPaused;

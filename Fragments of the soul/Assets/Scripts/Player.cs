@@ -94,6 +94,7 @@ public class Player : MonoBehaviour
     {
         maxhealth *= newValue;
     }
+
     public void Heal()
     {
         currentHealth = maxhealth;
@@ -133,6 +134,10 @@ public class Player : MonoBehaviour
     public float getCorruprionLevel()
     {
         return corruptionLevel;
+    }
+    public void setCorruprionLevel(float value)
+    {
+        value =  corruptionLevel;
     }
 
 }

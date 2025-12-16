@@ -18,6 +18,9 @@ public class BaseOponnentScript : MonoBehaviour
     public Player player;
     public Map gridManager;
     public HealthBarBehaviour healthBar;
+    public string enemyID;
+    public bool isLoading = false;
+
 
 
     // protected NavMeshAgent agent;
@@ -49,7 +52,11 @@ public class BaseOponnentScript : MonoBehaviour
         set
         {
             _hp = value;
-            if (_hp<0)
+            if (isLoading && _hp <= 0)
+            {
+                Destroy(gameObject);
+            }
+            else if (_hp<0)
             {
                 // die
                 player.addCorruptionPoints(corruptionPoints);
@@ -195,5 +202,7 @@ public class BaseOponnentScript : MonoBehaviour
     {
         return attackValue;
     }
+
+ 
 
 }

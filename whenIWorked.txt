@@ -126,3 +126,12 @@ added soul -> sceneLoader
 
 
 stared on first lvl, but foxFire doesnt show, dont know why
+
+
+13.12	1h 35min
+animations mostly nd fixing foxfire problem
+
+16.12	
+stared with saveManager
+
+it can load, but not respawn fallen enemies? shoud i just disable enemies instead of killing them???

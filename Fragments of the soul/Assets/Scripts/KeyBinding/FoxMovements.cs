@@ -9,11 +9,13 @@ public class FoxMovements : MonoBehaviour
     public Rigidbody2D playerBody;
     public PlaytimeKeyBind pausedGameManager;
     public Player player;
+    public Animator animator;
 
     private float horizontal, vertical;
 
     private Camera cam;
     private Vector3 mousePosition;
+
     void Start()
     {
         cam = Camera.main;
@@ -30,24 +32,38 @@ public class FoxMovements : MonoBehaviour
             if (Input.GetKey(KeyCode.A)) //left;  
             {
                 horizontal = -1;
+                animator.SetBool("WalksRight", false);
+                animator.SetBool("Stands", false);
+                animator.SetBool("WalksLeft", true);
             }
-            if (Input.GetKey(KeyCode.D)) //right;
+            else if (Input.GetKey(KeyCode.D)) //right;
             {
                 horizontal = 1;
+                animator.SetBool("WalksLeft", false);
+                animator.SetBool("Stands", false);
+                animator.SetBool("WalksRight", true);
             }
             if (Input.GetKey(KeyCode.W)) //up;
             {
                 vertical = 1;
+                
             }
-            if (Input.GetKey(KeyCode.S)) //down;
+            else if (Input.GetKey(KeyCode.S)) //down;
             {
                 vertical = -1;
+            
             }
             // maybe add jump
             //TODO: add attack, spells
             Vector3 tempVect = new Vector3(horizontal, vertical, 0);
             tempVect = tempVect.normalized * speed * Time.deltaTime;
-   
+
+            if (tempVect == Vector3.zero)
+            {
+                animator.SetBool("Stands", true);
+                animator.SetBool("WalksRight", false);
+                animator.SetBool("WalksLeft", false);
+            }
 
             playerBody.MovePosition(playerBody.transform.position + tempVect);
             cam.transform.position = Vector3.Lerp( cam.transform.position, playerBody.transform.position + new Vector3(0, 0, -10), 0.1f);

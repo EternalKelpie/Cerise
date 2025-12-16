@@ -229,6 +229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39e3bdcda86ca2344b96594ab36fc716, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scene: SampleScene
 --- !u!114 &575870710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1112,7 +1113,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 575870709}
         m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
-        m_MethodName: LoadTestScene
+        m_MethodName: LoadScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

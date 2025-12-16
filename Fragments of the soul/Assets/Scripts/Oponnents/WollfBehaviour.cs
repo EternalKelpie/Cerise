@@ -7,7 +7,10 @@ public class WollfBehaviour : BaseOponnentScript
     public bool Init()
     {
         healthBar.CreateHealthBar(maxHp / maxHp);
-        _hp = maxHp;
+        if (!isLoading)
+        {
+            _hp = maxHp;
+        }
         healthBar.UpdateHealthBar(maxHp / maxHp);
         def = 5;
         attackValue = 5;

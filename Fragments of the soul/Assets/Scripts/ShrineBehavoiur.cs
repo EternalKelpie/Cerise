@@ -8,10 +8,12 @@ public class ShrineBehavoiur : MonoBehaviour
     public SpriteRenderer clensePopup;
     public Player player;
     public PlaytimeKeyBind keyBind;
+    public string id;
+    public bool healUsed, cleanseUsed;
 
     float canInteractDistance = 3f;
     bool canHeal, canClense, canSee;
-    bool healUsed, cleanseUsed;
+    
 
     private void Start()
     {
