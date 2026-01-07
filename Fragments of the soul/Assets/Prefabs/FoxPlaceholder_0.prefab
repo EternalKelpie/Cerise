@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2487026118032202040}
   - component: {fileID: 4044646760224408783}
   - component: {fileID: 1360414914233259943}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FoxPlaceholder_0
   m_TagString: Player
   m_Icon: {fileID: 0}

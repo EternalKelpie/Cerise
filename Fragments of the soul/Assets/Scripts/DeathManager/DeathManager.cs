@@ -4,7 +4,7 @@ public class DeathManager : MonoBehaviour
 {
     public Player player;
     public Canvas DeathCanvas;
-    PlaytimeKeyBind pauseManager;
+    public PlaytimeKeyBind pauseManager;
 
     private void Start()
     {
@@ -12,12 +12,12 @@ public class DeathManager : MonoBehaviour
     }
     void Update()
     {
-        if (player.currentHealth <= 0)
+        if (player.currentHealth <= 0 && DeathCanvas.enabled == false)
         {
             pauseManager.TogglePause();
             DeathCanvas.enabled = true;
         }
-        else if (DeathCanvas.enabled == false)
+        else if (player.currentHealth > 0 && DeathCanvas.enabled == true)
         {
             DeathCanvas.enabled = false;
         }

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8823252476487401984}
   - component: {fileID: 8650112454742920574}
   - component: {fileID: 7913583131634180182}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -202,5 +202,7 @@ MonoBehaviour:
   player: {fileID: 0}
   gridManager: {fileID: 0}
   healthBar: {fileID: 8823252476487401984}
+  enemyID: 
+  isLoading: 0
   pathfinder: {fileID: 8650112454742920574}
   shadowFire: {fileID: 6129456715224357210, guid: dfd6f225076cfa246b03edefdba40c1a, type: 3}

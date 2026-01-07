@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5715280504393366326}
   - component: {fileID: 8497892340380634543}
   - component: {fileID: 501499846828435927}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ArmLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,7 +181,7 @@ GameObject:
   - component: {fileID: 824923823437214585}
   - component: {fileID: 5471716672101914191}
   - component: {fileID: 3919601611916748264}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ArmRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -351,7 +351,7 @@ GameObject:
   - component: {fileID: 855805197031380422}
   - component: {fileID: 6431861541854171204}
   - component: {fileID: 2750689911451028416}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Gollem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -528,6 +528,8 @@ MonoBehaviour:
   player: {fileID: 0}
   gridManager: {fileID: 0}
   healthBar: {fileID: 855805197031380422}
+  enemyID: 
+  isLoading: 0
   pathfinder: {fileID: 2750689911451028416}
 --- !u!114 &2750689911451028416
 MonoBehaviour:

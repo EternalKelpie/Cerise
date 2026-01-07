@@ -1,12 +1,21 @@
+using System.Collections;
 using System.IO;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SaveManager : MonoBehaviour
 {
+    //[SerializeField] int savePathNumber;
+
     public static SaveManager Instance;
 
-    string savePath;
+    string savePath1, savePath2, savePath3;
 
+    string pathForMainStats;
+
+
+    [SerializeField] private string scene = "SampleScene";
     void Awake()
     {
         if (Instance != null)
@@ -17,13 +26,15 @@ public class SaveManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
-
-        savePath = Application.persistentDataPath + "/save.json";
+        pathForMainStats = Application.persistentDataPath + "/mainStats.json";
+        savePath1 = Application.persistentDataPath + "/save1.json";
+        savePath2 = Application.persistentDataPath + "/save2.json";
+        savePath3 = Application.persistentDataPath + "/save3.json";
     }
 
     // ================== PUBLIC ==================
 
-    public void SaveGame()
+    public void SaveGame(int savePathNumber)
     {
         dataToSave data = new dataToSave();
 
@@ -31,27 +42,114 @@ public class SaveManager : MonoBehaviour
         SaveEnemies(data);
         SaveShrines(data);
         SaveSkillTree(data);
-
-        File.WriteAllText(savePath, JsonUtility.ToJson(data, true));
+        if (savePathNumber == 1) { File.WriteAllText(savePath1, JsonUtility.ToJson(data, true)); }
+        else if (savePathNumber == 2) { File.WriteAllText(savePath2, JsonUtility.ToJson(data, true)); }
+        else { File.WriteAllText(savePath3, JsonUtility.ToJson(data, true)); }
+        
         Debug.Log("GAME SAVED");
        
 
     }
-
-    public void LoadGame()
+    public void SaveMainStatsGame()
     {
+        dataToSave data = new dataToSave();
+
+        SavePlayer(data);
+        SaveEnemies(data);
+        SaveShrines(data);
+        SaveSkillTree(data);
+        File.WriteAllText(pathForMainStats, JsonUtility.ToJson(data, true)); 
+
+
+        Debug.Log("GAME SAVED");
+
+
+    }
+
+    public void LoadGame(int savePathNumber)
+    {
+        string savePath;
+        if (savePathNumber == 1)
+        { savePath = savePath1; }
+        else if (savePathNumber == 2)
+        { savePath = savePath2; }
+        else 
+        { savePath = savePath3; }
+
         if (!File.Exists(savePath))
+            {
+                Debug.LogWarning("NO SAVE FILE");
+                return;
+            }
+        
+        StartCoroutine(LoadGameCoroutine(savePath));
+
+    }
+
+    public void LoadLastSave()
+    {
+
+
+        string[] files = { savePath1, savePath2, savePath3};
+
+        string latest = files.OrderByDescending(f => File.GetLastWriteTime(f)).First();
+
+        if (!File.Exists(latest))
         {
             Debug.LogWarning("NO SAVE FILE");
             return;
         }
 
+        StartCoroutine(LoadGameCoroutine(latest));
+
+
+    }
+    public void LoadMainStats()
+    {
+        if (!File.Exists(pathForMainStats))
+        {
+            Debug.LogWarning("NO SAVE FILE");
+            return;
+        }
+
+        StartCoroutine(LoadMainStatsCoroutine(pathForMainStats));
+
+    }
+
+    IEnumerator LoadGameCoroutine(string path)
+    {
         dataToSave data =
-            JsonUtility.FromJson<dataToSave>(File.ReadAllText(savePath));
+            JsonUtility.FromJson<dataToSave>(File.ReadAllText(path));
+
+        AsyncOperation op = SceneManager.LoadSceneAsync(scene);
+
+        while (!op.isDone)
+            yield return null;
+
+        yield return null;
 
         LoadPlayer(data);
         LoadEnemies(data);
         LoadShrines(data);
+        LoadSkillTree(data);
+
+        Debug.Log("GAME LOADED");
+    }
+
+    IEnumerator LoadMainStatsCoroutine(string path)
+    {
+        dataToSave data =
+            JsonUtility.FromJson<dataToSave>(File.ReadAllText(path));
+
+        AsyncOperation op = SceneManager.LoadSceneAsync(scene);
+
+        while (!op.isDone)
+            yield return null;
+
+        yield return null;
+
+        LoadPlayerCorruprtionAndSkillPoint(data);
+        
         LoadSkillTree(data);
 
         Debug.Log("GAME LOADED");
@@ -67,7 +165,8 @@ public class SaveManager : MonoBehaviour
         {
             position = player.transform.position,
             hp = player.currentHealth,
-            corruptionPoints = player.getCorruprionLevel()
+            corruptionPoints = player.getCorruprionLevel(),
+            skillUpgradePoint = (player.GetSkillUpgradePoint()+player.skillUpgradePointSpend)
         };
     }
 
@@ -78,6 +177,13 @@ public class SaveManager : MonoBehaviour
         player.transform.position = data.player.position;
         player.currentHealth = data.player.hp;
         player.setCorruprionLevel(data.player.corruptionPoints);
+       
+    }
+    void LoadPlayerCorruprtionAndSkillPoint(dataToSave data)
+    {
+        Player player = FindObjectOfType<Player>();
+        player.setCorruprionLevel(data.player.corruptionPoints);
+        player.SetSkillUpgradePoint(data.player.skillUpgradePoint);
     }
 
     // ================== ENEMIES ==================
@@ -174,8 +280,12 @@ public class SaveManager : MonoBehaviour
         {
             gotHpUpgrade = tree.gotHpUpgrade,
             gotAttackUpgrade = tree.gotAttackUpgrade,
-            gotDefUpgrade = tree.gotDefUpgrade
-        };
+            gotDefUpgrade = tree.gotDefUpgrade,
+            gotDefHpUpgrade = tree.gotDefHpUpgrade,
+            gotCircleAttackUpgrade = tree.gotCircleAttackUpgrade,
+            gotAthHealUpgrade = tree.gotAthHealUpgrade,
+            gotShieldUpgrade = tree.gotShieldUpgrade
+};
     }
 
     void LoadSkillTree(dataToSave data)
@@ -188,6 +298,10 @@ public class SaveManager : MonoBehaviour
         tree.gotHpUpgrade = data.skillTree.gotHpUpgrade;
         tree.gotAttackUpgrade = data.skillTree.gotAttackUpgrade;
         tree.gotDefUpgrade = data.skillTree.gotDefUpgrade;
+        tree.gotDefHpUpgrade = data.skillTree.gotDefHpUpgrade;
+        tree.gotCircleAttackUpgrade = data.skillTree.gotCircleAttackUpgrade;
+        tree.gotAthHealUpgrade = data.skillTree.gotAthHealUpgrade;
+        tree.gotShieldUpgrade = data.skillTree.gotShieldUpgrade;
 
         tree.ApplyLoadedSkills();
     }

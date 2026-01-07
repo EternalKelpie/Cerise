@@ -10,11 +10,15 @@ public class Player : MonoBehaviour
     public GameObject foxFire;
     private GameObject clone;
 
+    public bool shieldAcquired, circleAttackAcquired, healAfterKillAcquired;
+
     float projectileSpeed = 10f;
+    float specialProjectileSpeed = 3f;
     float attackValue = 10;
     float defense = 5; // min 0 max 99
 
     float skillUpgradePoint;
+    public float skillUpgradePointSpend = 0;
 
     float corruptionLevel = 0;
 
@@ -23,6 +27,9 @@ public class Player : MonoBehaviour
         healthbar.SetMaxHealth(maxhealth);
         corruptionBar.SetMaxHealth(100);
         skillUpgradePoint = 2;                      // todo: change it, it should be added gradually
+        shieldAcquired = false;
+        circleAttackAcquired = false;
+        healAfterKillAcquired = false;
     }
 
 
@@ -66,6 +73,38 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void CircleAttack()
+    {
+
+        int projectileCount = 16;
+        float spawnRadius = 0.8f;
+
+
+        float angleStep = 360f / projectileCount;
+
+        for (int i = 0; i < projectileCount; i++)
+        {
+            float angle = i * angleStep;
+            Vector3 direction = new Vector3(
+                Mathf.Cos(angle * Mathf.Deg2Rad),
+                Mathf.Sin(angle * Mathf.Deg2Rad),
+                0f
+            );
+
+            Vector3 spawnPos = transform.position + direction * spawnRadius;
+
+            GameObject clone = Instantiate(foxFire, spawnPos, Quaternion.identity);
+            clone.GetComponent<FoxFireBehaviour>().Init(this);
+
+            Rigidbody2D rb = clone.GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                rb.linearVelocity = direction * specialProjectileSpeed;
+            }
+        }
+
+    }
+
 
 
 
@@ -86,6 +125,10 @@ public class Player : MonoBehaviour
     {
         return defense;
     }
+    public void AddSkillPoint() 
+    {
+        skillUpgradePoint++;
+    }
     public void ScaleDef(float newValue)
     {
         defense *= newValue;
@@ -98,6 +141,14 @@ public class Player : MonoBehaviour
     public void Heal()
     {
         currentHealth = maxhealth;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxhealth);
+
+        healthbar.SetHealth(currentHealth);
+
+    }
+    public void HealSlightly()
+    {
+        currentHealth += 5;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxhealth);
 
         healthbar.SetHealth(currentHealth);
@@ -116,6 +167,11 @@ public class Player : MonoBehaviour
     {
         return skillUpgradePoint;
     }
+
+    public void SetSkillUpgradePoint( float value)
+    {
+         skillUpgradePoint = value;
+    }
     public void SpendSkillUpgradePoint()
     {
         --skillUpgradePoint;
@@ -128,7 +184,6 @@ public class Player : MonoBehaviour
         corruptionLevel = Mathf.Clamp(corruptionLevel, 0, 100);
         corruptionBar.SetHealth( 100 - corruptionLevel);
         Debug.Log(" corruprion in total " + corruptionLevel);
-
 
     }
     public float getCorruprionLevel()

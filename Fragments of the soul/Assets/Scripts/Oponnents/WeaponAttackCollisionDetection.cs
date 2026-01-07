@@ -12,6 +12,8 @@ public class WeaponAttackCollisionDetection : MonoBehaviour
 
     [SerializeField] Vector3 offset;
 
+    ShieldAbility shield;
+
     private void Start()
     {
         StartCoroutine(UpdatePosition());
@@ -19,6 +21,7 @@ public class WeaponAttackCollisionDetection : MonoBehaviour
         {
             new Vector3(0.3f, 0f, 0f);
         }
+        shield = FindObjectOfType<ShieldAbility>();
 
     }
 
@@ -32,12 +35,17 @@ public class WeaponAttackCollisionDetection : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
 
+        if (shield.IsShieldActive)
+            return;
+       
+
         Player Foxopponent = collision.gameObject.GetComponent<Player>();
 
         if (Foxopponent != null && timerForAttack >= refreshTimeForAttack)
         {
             timerForAttack += Time.unscaledDeltaTime;
             Foxopponent.GetDamage(opponent.getAttackValue());
+           
 
         }
 

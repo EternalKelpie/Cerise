@@ -10,11 +10,15 @@ public class FoxMovements : MonoBehaviour
     public PlaytimeKeyBind pausedGameManager;
     public Player player;
     public Animator animator;
+    public ShieldAbility shield;
 
     private float horizontal, vertical;
 
     private Camera cam;
     private Vector3 mousePosition;
+
+    float refreshTimeSpecialMove = 3f;
+    float timerSpecialMove = 0;
 
     void Start()
     {
@@ -25,6 +29,7 @@ public class FoxMovements : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        timerSpecialMove += Time.unscaledDeltaTime;
         if (!pausedGameManager.IsPaused())
         {
             horizontal = 0;
@@ -73,6 +78,19 @@ public class FoxMovements : MonoBehaviour
             {
                 player.attack(mousePosition);
                 //OnGUI();
+            }
+
+            if (Input.GetKey(KeyCode.Q) && timerSpecialMove >= refreshTimeSpecialMove && player.circleAttackAcquired)
+            {
+                player.CircleAttack();
+                timerSpecialMove = 0f;
+
+            }
+            if (Input.GetKey(KeyCode.Q) && timerSpecialMove >= refreshTimeSpecialMove && player.shieldAcquired)
+            {
+                shield.ActivateShield();
+                timerSpecialMove = 0f;
+
             }
 
         }

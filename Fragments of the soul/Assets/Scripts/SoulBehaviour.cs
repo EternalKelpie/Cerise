@@ -22,6 +22,8 @@ public class SoulBehaviour : MonoBehaviour
             if (Input.GetKey(KeyCode.E) )
             {
                 Debug.Log(" soul fragment collected! ");
+                SaveManager.Instance.SaveMainStatsGame();
+                player.AddSkillPoint();
                 LoadTestScene();
             }
         }

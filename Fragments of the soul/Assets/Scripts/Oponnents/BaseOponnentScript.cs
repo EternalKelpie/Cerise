@@ -60,6 +60,10 @@ public class BaseOponnentScript : MonoBehaviour
             {
                 // die
                 player.addCorruptionPoints(corruptionPoints);
+                if (player.healAfterKillAcquired)
+                {
+                    player.HealSlightly();
+                }
                 Destroy(gameObject);
                
             }

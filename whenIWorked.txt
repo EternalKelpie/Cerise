@@ -135,3 +135,16 @@ animations mostly nd fixing foxfire problem
 stared with saveManager
 
 it can load, but not respawn fallen enemies? shoud i just disable enemies instead of killing them???
+
+18.12	~30 min
+
+fixed load
+
+27.12	45min
+28.12	3h	
+
+Used physics 2d matrix for collisions with shield and added shield tag
+
+shield and circular attack
+worked with skill tree and save manager
+

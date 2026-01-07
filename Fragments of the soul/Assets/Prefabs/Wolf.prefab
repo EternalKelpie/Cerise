@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7975064134344109174}
   - component: {fileID: 6024779006362574856}
   - component: {fileID: 7685149302571047404}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Wolf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,6 +191,8 @@ MonoBehaviour:
   player: {fileID: 0}
   gridManager: {fileID: 0}
   healthBar: {fileID: 7975064134344109174}
+  enemyID: 
+  isLoading: 0
   pathfinder: {fileID: 7685149302571047404}
 --- !u!114 &7685149302571047404
 MonoBehaviour:
@@ -217,7 +219,7 @@ GameObject:
   - component: {fileID: 7468158767359272272}
   - component: {fileID: 2831652034091414094}
   - component: {fileID: 8481136198895351347}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Triangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
