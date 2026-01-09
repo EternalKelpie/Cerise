@@ -192,7 +192,9 @@ public class Player : MonoBehaviour
     }
     public void setCorruprionLevel(float value)
     {
-        value =  corruptionLevel;
+        corruptionLevel =  value;
+        corruptionLevel = Mathf.Clamp(corruptionLevel, 0, 100);
+        corruptionBar.SetHealth(100 - corruptionLevel);
     }
 
 }

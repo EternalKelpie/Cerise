@@ -110,7 +110,7 @@ public class BaseOponnentScript : MonoBehaviour
 
 
     // Update is called once per frame
-    protected void Update()
+    protected void FixedUpdate()
     {
         if (!pausedGameManager.IsPaused())
         {

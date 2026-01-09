@@ -1,9 +1,10 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SkillTreeManager : MonoBehaviour
 {
-    [SerializeField] bool canChooseRoute;
+    [SerializeField] bool canChooseRoute = false;
     public bool chosenCorruptionPath = false, chosenCleanPath = false;
 
     public Player player;
@@ -18,7 +19,14 @@ public class SkillTreeManager : MonoBehaviour
 
     public bool gotDefHpUpgrade = false, gotCircleAttackUpgrade = false, gotAthHealUpgrade = false, gotShieldUpgrade = false;
 
-
+    private void Start()
+    {
+        if (canChooseRoute == false)
+        {
+            CleanPath();
+            CorruptionPath();
+        }
+    }
 
     public void DefUpgrade()
     {   if (player.GetSkillUpgradePoint() > 0 && !gotDefUpgrade)
@@ -151,7 +159,7 @@ public class SkillTreeManager : MonoBehaviour
             circleAthImage.color = Color.black;
             player.SpendSkillUpgradePoint();
             player.skillUpgradePointSpend++;
-            CorruptionPath();
+            
         }
     }
 
@@ -166,7 +174,7 @@ public class SkillTreeManager : MonoBehaviour
             atkHealImage.color = Color.black;
             player.SpendSkillUpgradePoint();
             player.skillUpgradePointSpend++;
-            CleanPath();
+            CorruptionPath();
         }
 
     }
@@ -182,7 +190,7 @@ public class SkillTreeManager : MonoBehaviour
             defHpImage.color = Color.black;
             player.SpendSkillUpgradePoint();
             player.skillUpgradePointSpend++;
-            CorruptionPath();
+            CleanPath();
 
         }
     }
@@ -207,5 +215,7 @@ public class SkillTreeManager : MonoBehaviour
         atkHealImage.color = Color.black;
 
     }
+
+   
 
 }

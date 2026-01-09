@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
 using System.Linq;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
 
@@ -18,11 +17,15 @@ public class ScenePreparationbehaviour : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if (!File.Exists(Application.persistentDataPath + "/mainStats.json") && LoadStats)
+        if (File.Exists(Application.persistentDataPath + "/mainStats.json") && LoadStats)
         {
             SaveManager.Instance.LoadMainStats();
         }
-        StartCoroutine(FadeInOut());
+        else {
+
+            Debug.LogWarning("NO SAVE FILE to load");
+        }
+            StartCoroutine(FadeInOut());
 
         SaveManager.Instance.SaveGame(3); // third save slot
     }

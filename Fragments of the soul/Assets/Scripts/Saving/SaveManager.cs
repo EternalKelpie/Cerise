@@ -141,18 +141,16 @@ public class SaveManager : MonoBehaviour
         dataToSave data =
             JsonUtility.FromJson<dataToSave>(File.ReadAllText(path));
 
-        AsyncOperation op = SceneManager.LoadSceneAsync(scene);
-
-        while (!op.isDone)
-            yield return null;
 
         yield return null;
 
-        LoadPlayerCorruprtionAndSkillPoint(data);
+        LoadPlayerCorruptionAndSkillPoint(data);
         
         LoadSkillTree(data);
 
-        Debug.Log("GAME LOADED");
+        
+
+        Debug.Log("GAME STATS LOADED");
     }
 
     // ================== PLAYER ==================
@@ -177,13 +175,25 @@ public class SaveManager : MonoBehaviour
         player.transform.position = data.player.position;
         player.currentHealth = data.player.hp;
         player.setCorruprionLevel(data.player.corruptionPoints);
+
        
     }
-    void LoadPlayerCorruprtionAndSkillPoint(dataToSave data)
+    void LoadPlayerCorruptionAndSkillPoint(dataToSave data)
     {
-        Player player = FindObjectOfType<Player>();
-        player.setCorruprionLevel(data.player.corruptionPoints);
-        player.SetSkillUpgradePoint(data.player.skillUpgradePoint);
+        try
+        {
+            Player player = FindObjectOfType<Player>();
+            Debug.Log($"Player found: {player != null}");
+
+            player.setCorruprionLevel(data.player.corruptionPoints);
+            player.SetSkillUpgradePoint(data.player.skillUpgradePoint);
+
+            Debug.LogWarning($"player stats loaded. Corruption: {data.player.corruptionPoints}");
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"EXCEPTION in LoadPlayerCorruptionAndSkillPoint: {e.Message}\n{e.StackTrace}");
+        }
     }
 
     // ================== ENEMIES ==================

@@ -148,3 +148,9 @@ Used physics 2d matrix for collisions with shield and added shield tag
 shield and circular attack
 worked with skill tree and save manager
 
+
+08. 12 idk, a lot
+added flower for plot
+new scenes
+and few fixes
+

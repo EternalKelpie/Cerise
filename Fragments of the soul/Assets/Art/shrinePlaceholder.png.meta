@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      shrinePlaceholder_0: 4073936442892601120
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

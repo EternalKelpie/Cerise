@@ -37,11 +37,11 @@ public class WollfBehaviour : BaseOponnentScript
         oponnent.freezeRotation = true;
     }
 
-    void Update()
+    /*void Update()
     {
         //timerForAttack += Time.unscaledDeltaTime;
-        base.Update();
-    }
+        base.FixedUpdate();
+    }*/
 
     /*
     void OnCollisionEnter2D(Collision2D collision)

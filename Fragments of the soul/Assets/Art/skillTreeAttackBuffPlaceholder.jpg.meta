@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      skillTreeAttackBuffPlaceholder_0: 4230808731777904983
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

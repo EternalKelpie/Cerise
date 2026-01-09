@@ -59,7 +59,7 @@ public class ShadowBehaviour : BaseOponnentScript
     {
         timer += Time.unscaledDeltaTime;
         //timerForAttack += Time.unscaledDeltaTime;
-        base.Update();
+        base.FixedUpdate();
         if (attacking && timer >= refreshTime)
         {
             timer = 0f;

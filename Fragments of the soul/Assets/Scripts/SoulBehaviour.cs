@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using UnityEngine.SceneManagement;
 
 public class SoulBehaviour : MonoBehaviour
@@ -7,6 +8,7 @@ public class SoulBehaviour : MonoBehaviour
     float canInteractDistance = 1f;
     public Player player;
     [SerializeField] string sceneToLoadName;
+    private bool isSaving = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -21,10 +23,7 @@ public class SoulBehaviour : MonoBehaviour
             popup.enabled = true;
             if (Input.GetKey(KeyCode.E) )
             {
-                Debug.Log(" soul fragment collected! ");
-                SaveManager.Instance.SaveMainStatsGame();
-                player.AddSkillPoint();
-                LoadTestScene();
+                StartCoroutine(SaveAndLoad());
             }
         }
         else 
@@ -39,4 +38,21 @@ public class SoulBehaviour : MonoBehaviour
         SceneManager.LoadScene(sceneToLoadName);
     }
 
+    private IEnumerator SaveAndLoad()
+    {
+        isSaving = true;
+        Debug.Log("Soul fragment collected!");
+
+        
+        player.AddSkillPoint();
+
+        
+        SaveManager.Instance.SaveMainStatsGame();
+
+        
+        yield return new WaitForSeconds(0.1f);
+
+        
+        LoadTestScene();
+    }
 }

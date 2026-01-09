@@ -51,6 +51,13 @@ public class PlaytimeKeyBind : MonoBehaviour
         Time.timeScale = gameIsPaused ? 0f : 1f;
     
     }
+    public void TogglePauseWithNoPauseMenu()
+    {
+        gameIsPaused = !gameIsPaused;
+
+        Time.timeScale = gameIsPaused ? 0f : 1f;
+
+    }
 
     public bool IsPaused()
     { 
