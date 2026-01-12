@@ -4,7 +4,7 @@ using UnityEngine;
 [System.Serializable]
 public class dataToSave
 {
-    // public int levelToLoad;   // if 1 then first and so on
+    public int levelToLoad;   // if 1 then first and so on
     public PlayerData player;
     public List<EnemyData> enemies = new();
     public List<ShrineData> shrines = new();

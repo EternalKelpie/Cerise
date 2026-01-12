@@ -8,14 +8,16 @@ public class SaveManager : MonoBehaviour
 {
     //[SerializeField] int savePathNumber;
 
+
     public static SaveManager Instance;
 
     string savePath1, savePath2, savePath3;
 
     string pathForMainStats;
+    string[] sceneToLoad = { "FirstScene", "FirstScene", "SecondScene", "ThirdScene", "LastScene" };
 
 
-    [SerializeField] private string scene = "SampleScene";
+    [SerializeField] private string scene = "FirstScene";
     void Awake()
     {
         if (Instance != null)
@@ -38,6 +40,7 @@ public class SaveManager : MonoBehaviour
     {
         dataToSave data = new dataToSave();
 
+        SaveSceneNumber(data);
         SavePlayer(data);
         SaveEnemies(data);
         SaveShrines(data);
@@ -45,20 +48,21 @@ public class SaveManager : MonoBehaviour
         if (savePathNumber == 1) { File.WriteAllText(savePath1, JsonUtility.ToJson(data, true)); }
         else if (savePathNumber == 2) { File.WriteAllText(savePath2, JsonUtility.ToJson(data, true)); }
         else { File.WriteAllText(savePath3, JsonUtility.ToJson(data, true)); }
-        
+
         Debug.Log("GAME SAVED");
-       
+
 
     }
     public void SaveMainStatsGame()
     {
         dataToSave data = new dataToSave();
 
+
         SavePlayer(data);
         SaveEnemies(data);
         SaveShrines(data);
         SaveSkillTree(data);
-        File.WriteAllText(pathForMainStats, JsonUtility.ToJson(data, true)); 
+        File.WriteAllText(pathForMainStats, JsonUtility.ToJson(data, true));
 
 
         Debug.Log("GAME SAVED");
@@ -73,15 +77,15 @@ public class SaveManager : MonoBehaviour
         { savePath = savePath1; }
         else if (savePathNumber == 2)
         { savePath = savePath2; }
-        else 
+        else
         { savePath = savePath3; }
 
         if (!File.Exists(savePath))
-            {
-                Debug.LogWarning("NO SAVE FILE");
-                return;
-            }
-        
+        {
+            Debug.LogWarning("NO SAVE FILE");
+            return;
+        }
+
         StartCoroutine(LoadGameCoroutine(savePath));
 
     }
@@ -90,7 +94,7 @@ public class SaveManager : MonoBehaviour
     {
 
 
-        string[] files = { savePath1, savePath2, savePath3};
+        string[] files = { savePath1, savePath2, savePath3 };
 
         string latest = files.OrderByDescending(f => File.GetLastWriteTime(f)).First();
 
@@ -121,7 +125,11 @@ public class SaveManager : MonoBehaviour
         dataToSave data =
             JsonUtility.FromJson<dataToSave>(File.ReadAllText(path));
 
-        AsyncOperation op = SceneManager.LoadSceneAsync(scene);
+        string sceneForLoad = GetSceneToLoad(data);
+
+        yield return null;
+        yield return null;
+        AsyncOperation op = SceneManager.LoadSceneAsync(sceneForLoad);
 
         while (!op.isDone)
             yield return null;
@@ -145,10 +153,10 @@ public class SaveManager : MonoBehaviour
         yield return null;
 
         LoadPlayerCorruptionAndSkillPoint(data);
-        
+
         LoadSkillTree(data);
 
-        
+
 
         Debug.Log("GAME STATS LOADED");
     }
@@ -164,7 +172,7 @@ public class SaveManager : MonoBehaviour
             position = player.transform.position,
             hp = player.currentHealth,
             corruptionPoints = player.getCorruprionLevel(),
-            skillUpgradePoint = (player.GetSkillUpgradePoint()+player.skillUpgradePointSpend)
+            skillUpgradePoint = (player.GetSkillUpgradePoint() + player.skillUpgradePointSpend)
         };
     }
 
@@ -176,7 +184,7 @@ public class SaveManager : MonoBehaviour
         player.currentHealth = data.player.hp;
         player.setCorruprionLevel(data.player.corruptionPoints);
 
-       
+
     }
     void LoadPlayerCorruptionAndSkillPoint(dataToSave data)
     {
@@ -229,7 +237,7 @@ public class SaveManager : MonoBehaviour
                 Destroy(e.gameObject);
                 Debug.Log("ni ma");
                 continue;
-                
+
             }
             Debug.Log("saved");
             e.transform.position = saved.position;
@@ -240,9 +248,9 @@ public class SaveManager : MonoBehaviour
             else {
                 e.isLoading = false;
             }
-                e.hp = saved.hp;
+            e.hp = saved.hp;
             e.isLoading = false;
-            
+
         }
     }
 
@@ -295,7 +303,7 @@ public class SaveManager : MonoBehaviour
             gotCircleAttackUpgrade = tree.gotCircleAttackUpgrade,
             gotAthHealUpgrade = tree.gotAthHealUpgrade,
             gotShieldUpgrade = tree.gotShieldUpgrade
-};
+        };
     }
 
     void LoadSkillTree(dataToSave data)
@@ -315,4 +323,34 @@ public class SaveManager : MonoBehaviour
 
         tree.ApplyLoadedSkills();
     }
+
+    void SaveSceneNumber(dataToSave data)
+    {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+
+        data.levelToLoad = 0;
+        for (int i = 0; i < sceneToLoad.Length; i++)
+        {
+            if (sceneToLoad[i] == currentSceneName)
+            {
+                Debug.Log($"Scene '{currentSceneName}' found at index {i}");
+                data.levelToLoad = i;
+            }
+
+        }
+
+
+    }
+
+    string GetSceneToLoad(dataToSave data)
+    {
+
+        int sceneNumer = data.levelToLoad;
+
+        return sceneToLoad[sceneNumer];
+    }
+
+
+
+
 }

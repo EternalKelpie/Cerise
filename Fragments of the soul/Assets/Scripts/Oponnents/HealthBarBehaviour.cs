@@ -5,19 +5,21 @@ public class HealthBarBehaviour : MonoBehaviour
 [SerializeField] public Sprite healthBarSprite;
 protected GameObject healthBar;
 protected GameObject healthBarFill;
-protected Vector3 healthBarOffset = new Vector3(0f, 2f, 0);
+[SerializeField] Vector3 healthBarOffset = new Vector3(0f, 2f, 0);
+[SerializeField] float scaler = 100f;
 
 
     public void CreateHealthBar(float healthPercentage)
     {
         healthBar = new GameObject("Healthbar");
         healthBar.transform.SetParent(transform);
-        healthBar.transform.localScale = Vector3.one;
+        healthBar.transform.localScale = Vector3.one * scaler;
         healthBar.transform.localPosition = healthBarOffset;
 
         healthBarFill = new GameObject("Fill");
         healthBarFill.transform.SetParent(healthBar.transform);
-        healthBarFill.transform.localScale = Vector3.one;
+        healthBarFill.transform.localScale = Vector3.one * scaler;
+        //healthBarFill.transform.localScale = Vector3.one * scaler;    new Vector3(healthBarWidth, healthBarHeight, 1f);
         healthBarFill.transform.localPosition = Vector3.zero;
         var fillRenderer = healthBarFill.AddComponent<SpriteRenderer>();
         fillRenderer.sprite = healthBarSprite;

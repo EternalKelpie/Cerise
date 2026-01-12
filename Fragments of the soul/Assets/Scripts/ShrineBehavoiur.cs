@@ -13,10 +13,12 @@ public class ShrineBehavoiur : MonoBehaviour
 
     float canInteractDistance = 3f;
     bool canHeal, canClense, canSee;
-    
+    private SkillTreeManager skillMangaer;
+
 
     private void Start()
     {
+        skillMangaer = FindAnyObjectByType<SkillTreeManager>();
         player = FindAnyObjectByType<Player>();
         useHealingPopup.enabled = false;
         clensePopup.enabled = false;
@@ -39,7 +41,7 @@ public class ShrineBehavoiur : MonoBehaviour
                 player.Heal();
                 healUsed = true;
             }
-            if (Input.GetKey(KeyCode.R) && canClense && !cleanseUsed) 
+            if (Input.GetKey(KeyCode.R) && canClense && !cleanseUsed && !skillMangaer.chosenCorruptionPath) 
             {
                 player.Cleanse();
                 cleanseUsed = true;
@@ -54,7 +56,7 @@ public class ShrineBehavoiur : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, player.transform.position) <= canInteractDistance)
         {
-            if (!cleanseUsed) 
+            if (!cleanseUsed && !skillMangaer.chosenCorruptionPath) 
             {
                 clensePopup.enabled = true;
             }

@@ -146,6 +146,7 @@ public class SkillTreeManager : MonoBehaviour
             player.SpendSkillUpgradePoint();
             player.skillUpgradePointSpend++;
             CleanPath();
+            chosenCleanPath = true;
         }
     }
 
@@ -159,7 +160,9 @@ public class SkillTreeManager : MonoBehaviour
             circleAthImage.color = Color.black;
             player.SpendSkillUpgradePoint();
             player.skillUpgradePointSpend++;
-            
+            chosenCorruptionPath = true;
+            CorruptionPath();
+
         }
     }
 
@@ -175,6 +178,7 @@ public class SkillTreeManager : MonoBehaviour
             player.SpendSkillUpgradePoint();
             player.skillUpgradePointSpend++;
             CorruptionPath();
+            chosenCorruptionPath = true;
         }
 
     }
@@ -191,6 +195,7 @@ public class SkillTreeManager : MonoBehaviour
             player.SpendSkillUpgradePoint();
             player.skillUpgradePointSpend++;
             CleanPath();
+            chosenCleanPath = true;
 
         }
     }
@@ -202,6 +207,7 @@ public class SkillTreeManager : MonoBehaviour
 
         shieldButton.enabled = false;
         shieldImage.color = Color.black;
+        //chosenCorruptionPath = true;
 
     }
 
@@ -213,9 +219,10 @@ public class SkillTreeManager : MonoBehaviour
 
         atkHealButton.enabled = false;
         atkHealImage.color = Color.black;
+        //chosenCleanPath = true;
 
     }
-
    
+
 
 }

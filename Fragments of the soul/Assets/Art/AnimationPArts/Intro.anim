@@ -24,15 +24,19 @@ AnimationClip:
       value: {fileID: 21300000, guid: 800a9a35dbcc9da41aa5898dfab5eff5, type: 3}
     - time: 0.16666667
       value: {fileID: 21300000, guid: 11992f60d4494704799b19dcedf48d9c, type: 3}
-    - time: 0.25
-      value: {fileID: 21300000, guid: d1a3261557258a4419e25f695d85d183, type: 3}
     - time: 0.33333334
+      value: {fileID: 21300000, guid: d1a3261557258a4419e25f695d85d183, type: 3}
+    - time: 0.5
       value: {fileID: 21300000, guid: 994a4a6cadff2864d80ec2a9dc44d390, type: 3}
-    - time: 0.41666666
+    - time: 0.75
       value: {fileID: 21300000, guid: 24f707c5fee4e0c40900b14cb4f7aaf2, type: 3}
-    - time: 0.9166667
+    - time: 1.0833334
+      value: {fileID: 21300000, guid: 24f707c5fee4e0c40900b14cb4f7aaf2, type: 3}
+    - time: 1.4166666
       value: {fileID: 21300000, guid: 1ea91221acf25fb4884deed8729533b2, type: 3}
-    - time: 1.5
+    - time: 1.6666666
+      value: {fileID: 21300000, guid: 1ea91221acf25fb4884deed8729533b2, type: 3}
+    - time: 2
       value: {fileID: 21300000, guid: 1ea91221acf25fb4884deed8729533b2, type: 3}
     attribute: m_Sprite
     path: 
@@ -61,6 +65,8 @@ AnimationClip:
     - {fileID: 21300000, guid: d1a3261557258a4419e25f695d85d183, type: 3}
     - {fileID: 21300000, guid: 994a4a6cadff2864d80ec2a9dc44d390, type: 3}
     - {fileID: 21300000, guid: 24f707c5fee4e0c40900b14cb4f7aaf2, type: 3}
+    - {fileID: 21300000, guid: 24f707c5fee4e0c40900b14cb4f7aaf2, type: 3}
+    - {fileID: 21300000, guid: 1ea91221acf25fb4884deed8729533b2, type: 3}
     - {fileID: 21300000, guid: 1ea91221acf25fb4884deed8729533b2, type: 3}
     - {fileID: 21300000, guid: 1ea91221acf25fb4884deed8729533b2, type: 3}
   m_AnimationClipSettings:
@@ -68,7 +74,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.5833334
+    m_StopTime: 2.0833333
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -88,7 +94,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 1.5833334
+  - time: 2
     functionName: LoadScene
     data: 
     objectReferenceParameter: {fileID: 0}

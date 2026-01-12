@@ -8,11 +8,17 @@ public class SoulBehaviour : MonoBehaviour
     float canInteractDistance = 1f;
     public Player player;
     [SerializeField] string sceneToLoadName;
-    private bool isSaving = false;
+    bool isSaving = false;
+    SkillTreeManager skillMangaer;
+
+    [SerializeField] bool isLastScene=false;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        skillMangaer = FindAnyObjectByType<SkillTreeManager>();
         popup.enabled = false;
+       
     }
 
     // Update is called once per frame
@@ -21,9 +27,15 @@ public class SoulBehaviour : MonoBehaviour
         if (Vector3.Distance(transform.position, player.transform.position) <= canInteractDistance)
         {
             popup.enabled = true;
-            if (Input.GetKey(KeyCode.E) )
+            if (Input.GetKey(KeyCode.E))
             {
-                StartCoroutine(SaveAndLoad());
+                if(isLastScene && skillMangaer.chosenCorruptionPath)
+                {
+                     sceneToLoadName = "CorruptionEndingScene";
+                }
+                
+                    StartCoroutine(SaveAndLoad());
+                
             }
         }
         else 

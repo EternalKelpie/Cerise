@@ -31,8 +31,8 @@ Transform:
   m_GameObject: {fileID: 3930850274358388660}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.3137, y: -3.4907, z: 0}
-  m_LocalScale: {x: 0.057436645, y: 0.05705252, z: 1}
+  m_LocalPosition: {x: -6.359, y: -3.504, z: 0}
+  m_LocalScale: {x: 0.019141063, y: 0.019406471, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: -6810791282384582480, guid: c4baf8036175e7c44ad2c4d020eba141, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1f5079249f53d6645b705f7da113ad15, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -127,7 +127,7 @@ CapsuleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 9.12, y: 10.18}
+  m_Size: {x: 40, y: 10.18}
   m_Direction: 0
 --- !u!50 &1669428011236319429
 Rigidbody2D:
@@ -168,7 +168,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 697862f6d271bac418aa752ce009bde5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBarSprite: {fileID: -3935609133846167939, guid: ec5ccd3b1d5d59d44a90dc95b7b78c12, type: 3}
+  healthBarSprite: {fileID: 21300000, guid: ec5ccd3b1d5d59d44a90dc95b7b78c12, type: 3}
+  healthBarOffset: {x: 0, y: 10, z: 0}
+  scaler: 8
 --- !u!114 &8650112454742920574
 MonoBehaviour:
   m_ObjectHideFlags: 0

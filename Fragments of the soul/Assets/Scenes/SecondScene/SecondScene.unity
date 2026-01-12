@@ -1132,7 +1132,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5256901963197883468, guid: c1bbcc1ec7049fb4ea287f5817f89dd9, type: 3}
       propertyPath: LoadStats
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5256901963197883468, guid: c1bbcc1ec7049fb4ea287f5817f89dd9, type: 3}
       propertyPath: imageForFadeIn
@@ -8439,6 +8439,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1406553225}
+    - target: {fileID: 8688348785957672667, guid: 0239c565c20208849ba0998da4056b35, type: 3}
+      propertyPath: sceneToLoadName
+      value: ThirdScene
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8664,6 +8668,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1359702481}
     m_Modifications:
+    - target: {fileID: 970064787280412627, guid: 83e3996b4c0394d4da6a3561109ffac0, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 3094630152705278414, guid: 83e3996b4c0394d4da6a3561109ffac0, type: 3}
       propertyPath: m_Name
       value: Background
