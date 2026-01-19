@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
 
     public bool shieldAcquired, circleAttackAcquired, healAfterKillAcquired;
 
-    float projectileSpeed = 10f;
+    float projectileSpeed = 5f;
     float specialProjectileSpeed = 3f;
     float attackValue = 10;
     float defense = 5; // min 0 max 99
@@ -47,6 +47,7 @@ public class Player : MonoBehaviour
 
     }
 
+
     public void GetDamage(float healthChange)
     {
 
@@ -59,18 +60,40 @@ public class Player : MonoBehaviour
 
     }
 
-    public void attack(Vector3 mousePosition)
+    public void attack(Vector3 mousePosition, Vector2 shootOrigin) 
     {
-        Vector3 direction = (mousePosition - transform.position).normalized;
 
-        clone = Instantiate(foxFire, gameObject.transform.localPosition, Quaternion.identity);
+        /*Vector3 direction = (mousePosition - transform.position).normalized;
+
+        //clone = Instantiate(foxFire, gameObject.transform.localPosition, Quaternion.identity);
+        clone = Instantiate(foxFire, transform.position, Quaternion.identity);
+
         clone.GetComponent<FoxFireBehaviour>().Init(this);
+
+        Vector3 dir = new Vector3(-5, 0, 0);
 
         Rigidbody2D rb = clone.GetComponent<Rigidbody2D>();
         if (rb != null)
         {
-            rb.linearVelocity = direction * projectileSpeed;
-        }
+            rb.linearVelocity = dir * projectileSpeed;
+        }*/
+        // Vector2 shootOrigin = transform.position;
+
+        Vector2 shootTarget = new Vector2(mousePosition.x, mousePosition.y);
+        Vector2 direction = (shootTarget - shootOrigin).normalized;
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        GameObject projectile = Instantiate(
+            foxFire,
+            shootOrigin,
+            Quaternion.Euler(0, 0, angle) // Obróæ pocisk w kierunku ruchu
+        );
+        projectile.GetComponent<FoxFireBehaviour>().Init(this);
+
+        Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
+        rb.linearVelocity = direction * projectileSpeed;
+
     }
 
     public void CircleAttack()

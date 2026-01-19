@@ -38,6 +38,11 @@ public class BaseOponnentScript : MonoBehaviour
     protected float def, corruptionPoints, attackValue;
 
 
+    private Vector2Int lastPlayerPos;
+    private float pathUpdateInterval = 0.5f; // Aktualizuj œcie¿kê co 0.5s
+    private float lastPathUpdateTime = 0f;
+
+
 
     /* protected GameObject healthBar;
      protected GameObject healthBarFill;
@@ -122,7 +127,14 @@ public class BaseOponnentScript : MonoBehaviour
             else
             {
 
-                if (path == null || pathIndex >= path.Count)
+                if (Time.time - lastPathUpdateTime > pathUpdateInterval)
+                {
+                    UpdateOponentPath();
+                    lastPathUpdateTime = Time.time;
+                }
+
+                MoveAlongPath();
+                /*if (path == null || pathIndex >= path.Count)
                 {
                     if (path == null)
                     {
@@ -141,9 +153,40 @@ public class BaseOponnentScript : MonoBehaviour
                 if (Vector3.Distance(oponnent.transform.position, targetPos) < 0.1f)
                 {
                     pathIndex++;
-                }
+                }*/
 
             }
+        }
+    }
+    private void UpdateOponentPath()
+    {
+        Vector2Int currentPlayerPos = WorldToGrid(playerPathfindingPurpouse.transform.position);
+
+        
+        if (currentPlayerPos != lastPlayerPos)
+        {
+            Vector2Int start = WorldToGrid(oponnent.transform.position);
+            path = pathfinder.FindPath(start, currentPlayerPos);
+            pathIndex = 0;
+            lastPlayerPos = currentPlayerPos;
+        }
+    }
+
+    private void MoveAlongPath()
+    {
+        if (path == null || pathIndex >= path.Count)
+        {
+            path = null; 
+            return;
+        }
+
+        Vector3 targetPos = GridToWorld(path[pathIndex]);
+        oponnent.transform.position = Vector3.MoveTowards(oponnent.transform.position, targetPos, speed * Time.deltaTime);
+
+
+        if (Vector3.Distance(oponnent.transform.position, targetPos) < 0.1f)
+        {
+            pathIndex++;
         }
     }
 

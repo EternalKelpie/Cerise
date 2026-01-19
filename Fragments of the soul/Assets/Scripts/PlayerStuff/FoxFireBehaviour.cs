@@ -20,26 +20,23 @@ public class FoxFireBehaviour : MonoBehaviour
             Destroy(gameObject);
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
-    { 
-            BaseOponnentScript opponent = collision.gameObject.GetComponent<BaseOponnentScript>();
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        BaseOponnentScript opponent = collision.GetComponent<BaseOponnentScript>();
 
-            if (opponent != null)
-            {
-                opponent.TakeDamage(player.getAttackValue());
-                Destroy(gameObject);
-               
-                return;
-            }
+        if (opponent != null)
+        {
+            opponent.TakeDamage(player.getAttackValue());
+            Destroy(gameObject);
+            return;
+        }
 
-            Player playerCollision = collision.gameObject.GetComponent<Player>();
+        Player playerCollision = collision.gameObject.GetComponent<Player>();
             if (playerCollision == null)
             {
                 Destroy(gameObject);
 
-
             }
-        
 
     }
 

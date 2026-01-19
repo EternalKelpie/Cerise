@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a809cb47f7e01364bb2c95bcb1a1bbd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 4
   cameraScrollIn: 3
   playerBody: {fileID: 963117414767470368}
   pausedGameManager: {fileID: 0}

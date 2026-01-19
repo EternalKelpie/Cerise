@@ -12,10 +12,12 @@ public class FoxMovements : MonoBehaviour
     public Animator animator;
     public ShieldAbility shield;
 
-    private float horizontal, vertical;
+    float horizontal, vertical;
 
-    private Camera cam;
-    private Vector3 mousePosition;
+    Camera cam;
+    Vector3 mousePosition;
+    float attackCooldown = 0.4f; 
+    float lastAttackTime = -1f;
 
     float refreshTimeSpecialMove = 3f;
     float timerSpecialMove = 0;
@@ -74,11 +76,28 @@ public class FoxMovements : MonoBehaviour
             cam.transform.position = Vector3.Lerp( cam.transform.position, playerBody.transform.position + new Vector3(0, 0, -10), 0.1f);
 
 
-            if (Input.GetMouseButtonUp(0)) // 0 for left click, 1 for right, 2 for middle
+            /*if (Input.GetMouseButtonUp(0)) // 0 for left click, 1 for right, 2 for middle
             {
                 player.attack(mousePosition);
                 //OnGUI();
+            }*/
+            if (Input.GetMouseButtonUp(0))
+            {
+                if (Time.time >= lastAttackTime + attackCooldown)
+                {
+                    Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(
+                    Input.mousePosition.x,
+                    Input.mousePosition.y,
+                    -Camera.main.transform.position.z
+                ));
+
+
+                    player.attack(mouseWorldPosition, playerBody.position);
+                    lastAttackTime = Time.time;
+                }
             }
+           
+
 
             if (Input.GetKey(KeyCode.Q) && timerSpecialMove >= refreshTimeSpecialMove && player.circleAttackAcquired)
             {
