@@ -31,8 +31,8 @@ Transform:
   m_GameObject: {fileID: 6866036377660125008}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.632, y: -1.6857, z: 0}
-  m_LocalScale: {x: -0.015417574, y: 0.019526193, z: 1}
+  m_LocalPosition: {x: -7.6871, y: -1.7255, z: 0}
+  m_LocalScale: {x: -0.012833589, y: 0.01649768, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 497971750906308029}
@@ -128,7 +128,7 @@ CapsuleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 40.81, y: 2}
+  m_Size: {x: 25.81, y: 2}
   m_Direction: 0
 --- !u!50 &8301977506825079199
 Rigidbody2D:

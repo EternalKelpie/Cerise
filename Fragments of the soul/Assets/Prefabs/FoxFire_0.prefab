@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 82933869669199832}
   - component: {fileID: 462593459116909482}
   - component: {fileID: 7068667283870385413}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: FoxFire_0
-  m_TagString: Player
+  m_TagString: FoxFire
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
