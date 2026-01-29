@@ -65,8 +65,9 @@ public class SkillTreeManager : MonoBehaviour
             player.skillUpgradePointSpend++;
         }
     }
-    public void ApplyLoadedSkills()
+    public int ApplyLoadedSkills()
     {
+        int howManySkills = 0;
         if (gotAttackUpgrade)
         {
             gotAttackUpgrade = true;
@@ -75,6 +76,8 @@ public class SkillTreeManager : MonoBehaviour
             AttackButton.enabled = false;
             AttackImage.color = Color.black;
             player.SpendSkillUpgradePoint();
+            player.skillUpgradePointSpend++;
+            howManySkills++;
         }
         if (gotHpUpgrade)
         {
@@ -83,6 +86,8 @@ public class SkillTreeManager : MonoBehaviour
             HpButton.enabled = false;
             HpImage.color = Color.black;
             player.SpendSkillUpgradePoint();
+            player.skillUpgradePointSpend++;
+            howManySkills++;
         }
         if (gotDefUpgrade)
         {
@@ -91,6 +96,8 @@ public class SkillTreeManager : MonoBehaviour
             DefButton.enabled = false;
             DefImage.color = Color.black;
             player.SpendSkillUpgradePoint();
+            player.skillUpgradePointSpend++;
+            howManySkills++;
         }
         if (gotDefHpUpgrade)
         {
@@ -101,6 +108,8 @@ public class SkillTreeManager : MonoBehaviour
             defHpImage.color = Color.black;
             player.SpendSkillUpgradePoint();
             player.skillUpgradePointSpend++;
+            howManySkills++;
+            CleanPath();
         }
         if (gotCircleAttackUpgrade)
         {
@@ -110,6 +119,8 @@ public class SkillTreeManager : MonoBehaviour
             circleAthImage.color = Color.black;
             player.SpendSkillUpgradePoint();
             player.skillUpgradePointSpend++;
+            howManySkills++;
+            CorruptionPath();
 
         }
         if (gotAthHealUpgrade)
@@ -121,6 +132,8 @@ public class SkillTreeManager : MonoBehaviour
             atkHealImage.color = Color.black;
             player.SpendSkillUpgradePoint();
             player.skillUpgradePointSpend++;
+            howManySkills++;
+            CorruptionPath();
         }
         if (gotShieldUpgrade)
         {
@@ -130,9 +143,11 @@ public class SkillTreeManager : MonoBehaviour
             shieldImage.color = Color.black;
             player.SpendSkillUpgradePoint();
             player.skillUpgradePointSpend++;
+            howManySkills++;
+            CleanPath();
         }
 
-
+        return howManySkills;
     }
 
     public void GetShield()

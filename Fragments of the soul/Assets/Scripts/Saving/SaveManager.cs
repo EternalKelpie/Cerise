@@ -139,7 +139,18 @@ public class SaveManager : MonoBehaviour
         LoadPlayer(data);
         LoadEnemies(data);
         LoadShrines(data);
-        LoadSkillTree(data);
+        int howManySkills = LoadSkillTree(data);
+
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        Player player = FindObjectOfType<Player>();
+        for (int i = 1; i < sceneToLoad.Length; i++)
+        {
+            if (sceneToLoad[i] == currentSceneName)
+            {
+                player.SetSkillUpgradePoint(i+1 - howManySkills);
+            }
+
+        }
 
         Debug.Log("GAME LOADED");
     }
@@ -154,8 +165,19 @@ public class SaveManager : MonoBehaviour
 
         LoadPlayerCorruptionAndSkillPoint(data);
 
-        LoadSkillTree(data);
+        int howManySkills = LoadSkillTree(data);
 
+
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        Player player = FindObjectOfType<Player>();
+        for (int i = 1; i < sceneToLoad.Length; i++)
+        {
+            if (sceneToLoad[i] == currentSceneName)
+            {
+                player.SetSkillUpgradePoint(i + 1 - howManySkills);
+            }
+
+        }
 
 
         Debug.Log("GAME STATS LOADED");
@@ -172,7 +194,7 @@ public class SaveManager : MonoBehaviour
             position = player.transform.position,
             hp = player.currentHealth,
             corruptionPoints = player.getCorruprionLevel(),
-            skillUpgradePoint = (player.GetSkillUpgradePoint() + player.skillUpgradePointSpend)
+            skillUpgradePoint = (player.GetSkillUpgradePoint() -1)
         };
     }
 
@@ -306,10 +328,10 @@ public class SaveManager : MonoBehaviour
         };
     }
 
-    void LoadSkillTree(dataToSave data)
+    int LoadSkillTree(dataToSave data)
     {
         if (data.skillTree == null)
-            return;
+            return 0;
 
         SkillTreeManager tree = FindObjectOfType<SkillTreeManager>();
 
@@ -321,7 +343,8 @@ public class SaveManager : MonoBehaviour
         tree.gotAthHealUpgrade = data.skillTree.gotAthHealUpgrade;
         tree.gotShieldUpgrade = data.skillTree.gotShieldUpgrade;
 
-        tree.ApplyLoadedSkills();
+        int howManySkills =  tree.ApplyLoadedSkills();
+        return howManySkills;
     }
 
     void SaveSceneNumber(dataToSave data)

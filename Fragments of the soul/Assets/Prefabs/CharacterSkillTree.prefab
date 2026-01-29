@@ -1378,7 +1378,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Update points available : '
+  m_text: 'Upgrate points available : '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1497,9 +1497,9 @@ RectTransform:
   - {fileID: 2455899533314987680}
   - {fileID: 8595202512189906122}
   - {fileID: 1498161780197245161}
-  - {fileID: 6395179449615342485}
   - {fileID: 5999243344843063222}
   - {fileID: 1371758646590339316}
+  - {fileID: 6395179449615342485}
   - {fileID: 2992967118764006349}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

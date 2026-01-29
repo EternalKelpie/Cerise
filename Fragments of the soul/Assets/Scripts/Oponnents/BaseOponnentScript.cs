@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 public class BaseOponnentScript : MonoBehaviour
 {
     [SerializeField] protected float speed = 1f;
-    [SerializeField] protected float canSeeDistance = 10f;  //Todo: dodaæ widocznoœæ, sprawdzanie, ¿eby przez œciany nie by³o widaæ
+    [SerializeField] protected float canSeeDistance = 10f;  
     [SerializeField] protected float maxHp =50;
 
     public PlaytimeKeyBind pausedGameManager;
@@ -39,7 +39,7 @@ public class BaseOponnentScript : MonoBehaviour
 
 
     private Vector2Int lastPlayerPos;
-    private float pathUpdateInterval = 0.5f; // Aktualizuj œcie¿kê co 0.5s
+    private float pathUpdateInterval = 0.5f; // Aktualizuj co 0.5s
     private float lastPathUpdateTime = 0f;
 
 
@@ -209,13 +209,23 @@ public class BaseOponnentScript : MonoBehaviour
             if (!pausedGameManager.IsPaused())
                 if (gridManager != null && playerPathfindingPurpouse != null)
                 {
+                    if(attacking)
+                    {
                     Vector2Int start = WorldToGrid(oponnent.transform.position);
                     Vector2Int target = WorldToGrid(playerPathfindingPurpouse.transform.position);
                     path = pathfinder.FindPath(start, target);
                     pathIndex = 0;
                     yield return new WaitForSeconds(1f);
+                    }
+                    else 
+                    {
+                        path = null;
+                    }
                 }
+            float waitTime = attacking ? 0.5f : 1.0f;
+            yield return new WaitForSeconds(waitTime);
         }
+
     }
 
     protected void CheckDistance() 
