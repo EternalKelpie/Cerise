@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     public PlayerHp healthbar;
     public PlayerHp corruptionBar;
     public GameObject foxFire;
+    public HurtEffect hurtEffect;
     private GameObject clone;
 
     public bool shieldAcquired, circleAttackAcquired, healAfterKillAcquired;
@@ -33,19 +34,6 @@ public class Player : MonoBehaviour
     }
 
 
-    void Update()
-    {
-        if (Input.GetKeyDown("k"))
-        {
-            GetDamage(-20f);
-        }
-        if (Input.GetKeyDown("l"))
-        {
-            GetDamage(20f);
-        }
-
-
-    }
 
 
     public void GetDamage(float healthChange)
@@ -56,28 +44,13 @@ public class Player : MonoBehaviour
 
         healthbar.SetHealth(currentHealth);
 
-
+        hurtEffect.StartHurtScreen();
 
     }
 
     public void attack(Vector3 mousePosition, Vector2 shootOrigin) 
     {
 
-        /*Vector3 direction = (mousePosition - transform.position).normalized;
-
-        //clone = Instantiate(foxFire, gameObject.transform.localPosition, Quaternion.identity);
-        clone = Instantiate(foxFire, transform.position, Quaternion.identity);
-
-        clone.GetComponent<FoxFireBehaviour>().Init(this);
-
-        Vector3 dir = new Vector3(-5, 0, 0);
-
-        Rigidbody2D rb = clone.GetComponent<Rigidbody2D>();
-        if (rb != null)
-        {
-            rb.linearVelocity = dir * projectileSpeed;
-        }*/
-        // Vector2 shootOrigin = transform.position;
 
         Vector2 shootTarget = new Vector2(mousePosition.x, mousePosition.y);
         Vector2 direction = (shootTarget - shootOrigin).normalized;
@@ -159,6 +132,7 @@ public class Player : MonoBehaviour
     public void ScaleHp(float newValue)
     {
         maxhealth *= newValue;
+        healthbar.SetMaxHealth(maxhealth);
     }
 
     public void Heal()

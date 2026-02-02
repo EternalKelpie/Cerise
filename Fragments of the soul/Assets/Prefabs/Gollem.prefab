@@ -479,7 +479,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 3
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 0
@@ -522,7 +522,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  canSeeDistance: 2
+  canSeeDistance: 3
   maxHp: 100
   pausedGameManager: {fileID: 0}
   oponnent: {fileID: 8227745281613590357}

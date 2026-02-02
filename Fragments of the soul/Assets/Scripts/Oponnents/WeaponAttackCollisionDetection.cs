@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class WeaponAttackCollisionDetection : MonoBehaviour
 {
-    float refreshTimeForAttack = 2f;
+    float refreshTimeForAttack = 4f;
     float timerForAttack = 0;
     public BaseOponnentScript opponent;
     public GameObject opponentPosition;

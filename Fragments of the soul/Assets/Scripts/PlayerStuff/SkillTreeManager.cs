@@ -25,6 +25,8 @@ public class SkillTreeManager : MonoBehaviour
         {
             CleanPath();
             CorruptionPath();
+            chosenCorruptionPath = false;
+            chosenCleanPath = false;
         }
     }
 
@@ -222,7 +224,7 @@ public class SkillTreeManager : MonoBehaviour
 
         shieldButton.enabled = false;
         shieldImage.color = Color.black;
-        //chosenCorruptionPath = true;
+        chosenCorruptionPath = true;
 
     }
 
@@ -234,7 +236,7 @@ public class SkillTreeManager : MonoBehaviour
 
         atkHealButton.enabled = false;
         atkHealImage.color = Color.black;
-        //chosenCleanPath = true;
+        chosenCleanPath = true;
 
     }
    

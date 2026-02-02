@@ -140,6 +140,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1016437055}
     - target: {fileID: 4044646760224408783, guid: a7143427ad906e641bdb7ab20895b6ab, type: 3}
+      propertyPath: hurtEffect
+      value: 
+      objectReference: {fileID: 1016437056}
+    - target: {fileID: 4044646760224408783, guid: a7143427ad906e641bdb7ab20895b6ab, type: 3}
       propertyPath: corruptionBar
       value: 
       objectReference: {fileID: 1016437054}
@@ -19949,6 +19953,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 02e12ae093899d64485383e5c4e23e45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1016437056 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6488424877256181267, guid: 44bd355f72904dd46a1c1b3cfc3788f3, type: 3}
+  m_PrefabInstance: {fileID: 1016437052}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc540a96178000a47bc95a59e07fb23f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1069861652

@@ -582,6 +582,7 @@ GameObject:
   - component: {fileID: 5553597934266458585}
   - component: {fileID: 4294676250471319180}
   - component: {fileID: 8202323493944927048}
+  - component: {fileID: 6488424877256181267}
   m_Layer: 5
   m_Name: FadingScreen
   m_TagString: Untagged
@@ -646,3 +647,17 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6488424877256181267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8821430749648312990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc540a96178000a47bc95a59e07fb23f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  imageForFadeIn: {fileID: 8202323493944927048}
+  fadeDuration: 0.5

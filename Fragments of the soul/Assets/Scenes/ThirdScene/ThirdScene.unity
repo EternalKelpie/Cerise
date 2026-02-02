@@ -1739,6 +1739,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02e12ae093899d64485383e5c4e23e45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1226599214 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6488424877256181267, guid: 44bd355f72904dd46a1c1b3cfc3788f3, type: 3}
+  m_PrefabInstance: {fileID: 1226599209}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc540a96178000a47bc95a59e07fb23f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1376805582
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5980,6 +5991,10 @@ PrefabInstance:
       propertyPath: healthbar
       value: 
       objectReference: {fileID: 1226599213}
+    - target: {fileID: 4044646760224408783, guid: a7143427ad906e641bdb7ab20895b6ab, type: 3}
+      propertyPath: hurtEffect
+      value: 
+      objectReference: {fileID: 1226599214}
     - target: {fileID: 4044646760224408783, guid: a7143427ad906e641bdb7ab20895b6ab, type: 3}
       propertyPath: corruptionBar
       value: 
